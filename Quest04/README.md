@@ -1,47 +1,76 @@
 # Quest 04. OOP의 기본
 
 ## Introduction
-* 이번 퀘스트에서는 바닐라 자바스크립트의 객체지향 프로그래밍에 대해 알아볼 예정입니다.
+
+- 이번 퀘스트에서는 바닐라 자바스크립트의 객체지향 프로그래밍에 대해 알아볼 예정입니다.
 
 ## Topics
-* 객체지향 프로그래밍
-  * 프로토타입 기반 객체지향 프로그래밍
-  * 자바스크립트 클래스
-    * 생성자
-    * 멤버 함수
-    * 멤버 변수
-  * 정보의 은폐
-  * 다형성
-* 코드의 재사용
+
+- 객체지향 프로그래밍
+  - 프로토타입 기반 객체지향 프로그래밍
+  - 자바스크립트 클래스
+    - 생성자
+    - 멤버 함수
+    - 멤버 변수
+  - 정보의 은폐
+  - 다형성
+- 코드의 재사용
 
 ## Resources
-* [MDN - Classes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes)
-* [MDN - Inheritance and the prototype chain](https://developer.mozilla.org/ko/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
-* [MDN - Inheritance](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Inheritance)
-* [Polymorphism](https://medium.com/@viktor.kukurba/object-oriented-programming-in-javascript-3-polymorphism-fb564c9f1ce8)
-* [Class Composition](https://alligator.io/js/class-composition/)
-* [Inheritance vs Composition](https://woowacourse.github.io/javable/post/2020-05-18-inheritance-vs-composition/)
+
+- [MDN - Classes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes)
+- [MDN - Inheritance and the prototype chain](https://developer.mozilla.org/ko/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+- [MDN - Inheritance](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Inheritance)
+- [Polymorphism](https://medium.com/@viktor.kukurba/object-oriented-programming-in-javascript-3-polymorphism-fb564c9f1ce8)
+- [Class Composition](https://alligator.io/js/class-composition/)
+- [Inheritance vs Composition](https://woowacourse.github.io/javable/post/2020-05-18-inheritance-vs-composition/)
 
 ## Checklist
-* 객체지향 프로그래밍은 무엇일까요?
-  * `#`로 시작하는 프라이빗 필드는 왜 필요한 것일까요? 정보를 은폐(encapsulation)하면 어떤 장점이 있을까요?
-  * 다형성이란 무엇인가요? 다형성은 어떻게 코드 구조의 정리를 도와주나요?
-  * 상속이란 무엇인가요? 상속을 할 때의 장점과 단점은 무엇인가요?
-  * OOP의 합성(Composition)이란 무엇인가요? 합성이 상속에 비해 가지는 장점은 무엇일까요?
-* 자바스크립트의 클래스는 어떻게 정의할까요?
-  * 프로토타입 기반의 객체지향 프로그래밍은 무엇일까요?
-  * 자바스크립트의 클래스는 이전의 프로토타입 기반의 객체지향 구현과 어떤 관계를 가지고 있나요?
+
+- 객체지향 프로그래밍은 무엇일까요?
+
+객체 지향 프로그램은 프로그래밍에서 필요한 데이터를 추상화 시켜 상태와 행위를 가진 객체로 만들고, 객체들간의 상호작용을 통해 로직을 구성하는 프로그래밍 방법이다.
+
+- `#`로 시작하는 프라이빗 필드는 왜 필요한 것일까요? 정보를 은폐(encapsulation)하면 어떤 장점이 있을까요?
+
+프라이빗 필드는 동일한 패키지이건 다른 패키지이건 상관없이 생성자를 호출하지 못하도록 제한한다. 그렇기 때문에 멤버변수나 메소드 앞에 붙여서 다른 패키지가 변수나 메소드의 내용을 변경시키지 못하게 하기위해서 필요하다. 정보 은폐는 외부 객체의 접근을 막아 객체에 포함된 정보의 손상과 오용을 막을 수 있고, 내부 조작 방법이 바뀌어도 객체에 접근하는 접근방법이 변경되지 않는다. 또한 데이터가 바뀌어도 다른 객체에 영향을 주지않아서 독립성이 유지된다는 장점이 있다.
+
+- 다형성이란 무엇인가요? 다형성은 어떻게 코드 구조의 정리를 도와주나요?
+
+다형성이란 프로그램 언어 각 요소인 상수, 변수, 식, 객체, 메소드 등이 다양한 자료형에 속하는 것이 허가되는 성질을 가리킨다. 또한 여러 형태를 받아들일 수 있는 성질, 상황에 따라 의미를 다르게 부여할 수 있는 특성들으로 정의 된다. 다형성은 오버로딩을 이용해서 동일한 이름의 메소드가 다른 반환 타입, 다른 매개변수의 개수나 타입을 가질 수 있도록 코드 구조의 정리를 도와주거나, 오버라이딩을 이용해서 상위 클래스의 메서드를 하위 클래스에서 재정의해서 코드 구조의 정리를 도와준다.
+
+- 상속이란 무엇인가요? 상속을 할 때의 장점과 단점은 무엇인가요?
+
+상속은 클래스를 상속하는 것으로 부모 클래스의 변수와 메소드를 자식 클래스가 물려받아서 그대로 사용할 수 있도록 해준다. 상속의 장점은 기존에 작성된 클래스를 재활용할 수 있고, 자식 클래스 설계시 중복되는 멤버를 미리 부모 클래스에 작성해 놓으면, 자식 클래스에서는 해당 멤버를 작성하지 않아도 되고, 클래스 간의 계층적 관계를 구성함으로써 다형성의 문법적 토대를 마련할 수 있다. 단점으로는 상속구조가 복잡해지면 상위클래스의 변화가 하위 클래스에 주는 영향을 예측하기 힘들다.
+
+- OOP의 합성(Composition)이란 무엇인가요?
+  합성이 상속에 비해 가지는 장점은 무엇일까요?
+
+합성(Composition)은 중복되는 로직들을 갖는 객체를 구현하고, 이 객체를 주입받아 중복 로직을 호출함으로써 퍼블릭 인터페이스를 재사용하는 방법이다. 상속은 컴파일 시점에 부모 클래스와 자식 클래스의 코드가 강하게 결합되는 반면에 합성을 이용하면 구현을 효과적으로 캡슐화할 수 있고 의존하는 객체를 교체하는 것이 비교적 쉬우므로 설계가 유연해진다. 상속은 클래스를 통해 강하게 결합되지만 합성은 메세지를 통해 느슨하게 결합되기 때문이다.
+
+- 자바스크립트의 클래스는 어떻게 정의할까요?
+
+클래스는 객체 지향 프로그래밍에서 특정 객체를 생성하기 위해 변수와 메서드를 정의하는 일종의 틀인 템플릿으로, 객체를 정의하기 위한 멤버 변수와 메서드로 구성된다. 즉 class를 통해서 원하는 구조의 객체 틀을 짜놓고, 비슷한 모양의 객체를 공장처럼 찍어낼 수 있다.
+
+- 프로토타입 기반의 객체지향 프로그래밍은 무엇일까요?
+
+프로토타입 기반의 객체지향 프로그래밍은 클래스가 없고, 클래스 기반 언어에서 상속을 사용하는 것과는 다르게, 객체를 프로토타입으로 하여 복제의 과정을 통하여 객체의 동작 방식을 다시 사용할 수 있다.
+
+- 자바스크립트의 클래스는 이전의 프로토타입 기반의 객체지향 구현과 어떤 관계를 가지고 있나요?
+  자바스크립트 이전의 프로토타입은 class가 없었기 때문에 클래스 대체용으로 생성자 함수를 이용해 객체 인스턴스를 생성했다. 하지만 new 키워드로 class 생성이 가능해짐으로써, contructor() 생성자 함수로 속성 설정이 가능, 메서드 정의, 상속, 부모 메서드 호출 가능한 class를 사용할 수 있다.
 
 ## Quest
-* 웹 상에서 동작하는 간단한 바탕화면 시스템을 만들 예정입니다.
-* 요구사항은 다음과 같습니다:
-  * 아이콘은 폴더와 일반 아이콘, 두 가지의 종류가 있습니다.
-  * 아이콘들을 드래그를 통해 움직일 수 있어야 합니다.
-  * 폴더 아이콘은 더블클릭하면 해당 폴더가 창으로 열리며, 열린 폴더의 창 역시 드래그를 통해 움직일 수 있어야 합니다.
-  * 바탕화면의 생성자를 통해 처음에 생겨날 아이콘과 폴더의 개수를 받을 수 있습니다.
-  * 여러 개의 바탕화면을 각각 다른 DOM 엘리먼트에서 동시에 운영할 수 있습니다.
-  * Drag & Drop API를 사용하지 말고, 실제 마우스 이벤트(mouseover, mousedown, mouseout 등)를 사용하여 구현해 보세요!
+
+- 웹 상에서 동작하는 간단한 바탕화면 시스템을 만들 예정입니다.
+- 요구사항은 다음과 같습니다:
+  - 아이콘은 폴더와 일반 아이콘, 두 가지의 종류가 있습니다.
+  - 아이콘들을 드래그를 통해 움직일 수 있어야 합니다.
+  - 폴더 아이콘은 더블클릭하면 해당 폴더가 창으로 열리며, 열린 폴더의 창 역시 드래그를 통해 움직일 수 있어야 합니다.
+  - 바탕화면의 생성자를 통해 처음에 생겨날 아이콘과 폴더의 개수를 받을 수 있습니다.
+  - 여러 개의 바탕화면을 각각 다른 DOM 엘리먼트에서 동시에 운영할 수 있습니다.
+  - Drag & Drop API를 사용하지 말고, 실제 마우스 이벤트(mouseover, mousedown, mouseout 등)를 사용하여 구현해 보세요!
 
 ## Advanced
-* 객체지향의 역사는 어떻게 될까요?
-* Smalltalk, Java, Go, Kotlin 등의 언어들로 넘어오면서 객체지향 패러다임 측면에서 어떤 발전이 있었을까요?
+
+- 객체지향의 역사는 어떻게 될까요?
+- Smalltalk, Java, Go, Kotlin 등의 언어들로 넘어오면서 객체지향 패러다임 측면에서 어떤 발전이 있었을까요?
