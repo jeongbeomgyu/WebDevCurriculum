@@ -1,49 +1,86 @@
 # Quest 09. 서버와 클라이언트의 대화
 
 ## Introduction
-* 이번 퀘스트에서는 서버와 클라이언트의 연동, 그리고 웹 API의 설계 방법론 중 하나인 REST에 대해 알아보겠습니다.
+
+- 이번 퀘스트에서는 서버와 클라이언트의 연동, 그리고 웹 API의 설계 방법론 중 하나인 REST에 대해 알아보겠습니다.
 
 ## Topics
-* expressJS, fastify
-* AJAX, `XMLHttpRequest`, `fetch()`
-* REST, CRUD
-* CORS
+
+- expressJS, fastify
+- AJAX, `XMLHttpRequest`, `fetch()`
+- REST, CRUD
+- CORS
 
 ## Resources
-* [Express Framework](http://expressjs.com/)
-* [Fastify Framework](https://www.fastify.io/)
-* [MDN - Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
-* [MDN - XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
-* [REST API Tutorial](https://restfulapi.net/)
-* [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
-* [MDN - CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+
+- [Express Framework](http://expressjs.com/)
+- [Fastify Framework](https://www.fastify.io/)
+- [MDN - Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [MDN - XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+- [REST API Tutorial](https://restfulapi.net/)
+- [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+- [MDN - CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
 ## Checklist
-* 비동기 프로그래밍이란 무엇인가요?
-  * 콜백을 통해 비동기적 작업을 할 때의 불편한 점은 무엇인가요? 콜백지옥이란 무엇인가요?
-  * 자바스크립트의 Promise는 어떤 객체이고 어떤 일을 하나요?
-  * 자바스크립트의 `async`와 `await` 키워드는 어떤 역할을 하며 그 정체는 무엇일까요?
-* 브라우저 내 스크립트에서 외부 리소스를 가져오려면 어떻게 해야 할까요?
-  * 브라우저의 `XMLHttpRequest` 객체는 무엇이고 어떻게 동작하나요?
-  * `fetch` API는 무엇이고 어떻게 동작하나요?
-* REST는 무엇인가요?
-  * REST API는 어떤 목적을 달성하기 위해 나왔고 어떤 장점을 가지고 있나요?
-  * RESTful한 API 설계의 단점은 무엇인가요?
-* CORS란 무엇인가요? 이러한 기능이 왜 필요할까요? CORS는 어떻게 구현될까요?
+
+- 비동기 프로그래밍이란 무엇인가요?
+  비동기 프로그래밍이란 각각의 스레드가 독립적으로 자기 작업을 수행하는 것을 의미하기 때문에 작업 순서를 보장할 수 없다. 즉, 어떤 스레드가 먼저 작업을 마칠지 알 수 없다는 것이다.
+
+  - 콜백을 통해 비동기적 작업을 할 때의 불편한 점은 무엇인가요? 콜백지옥이란 무엇인가요?
+
+  콜백을 통해 비동기적 작업을 할때 불편한 점은 첫 번째로 가독성이 매우 떨어진다는 것이고, 두 번째는 에러처리를 한다면 모든 콜백에서 각각 에러 핸들링을 해주어야 한다는 점이다. 콜백 지옥이란 콜백 함수를 익명 함수로 전달하는 과정에서 또 다시 콜백 안에 함수 호출이 반복되어 코드의 들여쓰기 수준이 감당하기 힘들 정도로 깊어지는 현상을 말한다. 주로 이벤트 처리나 서버 통신과 같은 비동기 작업을 제어하기 위해서 사용된다.
+
+  - 자바스크립트의 Promise는 어떤 객체이고 어떤 일을 하나요?
+
+  promise는 자바스크립트에서 제공하는 비동기를 간편하게 처리할 수 있게 도와주는 객체이다.promise는 promise가 생성된 시점에는 알려지지 않았을 수도 있는 값을 위한 대리자로, 비동기 연산이 종료된 이후에 결과 값과 실패 사유를 정리하기 위한 처리기를 연결할 수 있다. 또한 프로미스를 사용하면 비동기 매서드에서 마치 동기 매서드처럼 값을 반환할 수 있다. 이것은 최종 결과를 반환하는 것이 아니라 미래의 어떤 시점에 결과를 제공하겠다는 promise를 반환한다.
+
+  - 자바스크립트의 `async`와 `await` 키워드는 어떤 역할을 하며 그 정체는 무엇일까요?
+
+async와 await는 비동기 처리 패턴으로 async는
+async의 역할은 async를 함수앞에 붙이면 해당 함수는 자동으로 프로미스를 반환하게 하고, await의 역할은 비동기로 처리되는 부분에 await를 붙이면 해당 프로미스가 끝날때까지 기다리게 한다.
+
+- 브라우저 내 스크립트에서 외부 리소스를 가져오려면 어떻게 해야 할까요?
+
+<head>안에 <link>요소를 배치하여 가져오는데, href특성에 경로를 rel에는 현재문서와 연결한 아이템의 관계가 어떻게 되는지를 설명한다.
+
+- 브라우저의 `XMLHttpRequest` 객체는 무엇이고 어떻게 동작하나요?
+
+XMLHttpRequest 객체는 웹 브라우저가 서버와 데이터를 교환할 때 사용한다. 웹 브라우저의 인터페이스에서 자바스크립트 함수를 호출시키면 XMLHttpRequest 객체의 인스턴스를 생성시킨다. HTML의 상태를 가지고 있는 XML을 서버로 전송하고 서버에서 전송된 요청을 데이터 교환 내부처리를 통해 자체 처리 후 다시 웹브라우저로 재전송한다. XML의 데이터를 받은 XMLHttpRequest 객체는 HTML의 상태를 포함시켜 인터페이스로 전송하여 업데이트 한다.
+
+- `fetch` API는 무엇이고 어떻게 동작하나요?
+
+Fetch API는 HTTP 파이프라인을 구성하는 요청과 응답 요소를 자바스크립트에서 접근하고 조작할 수 있는 인터페이스를 제공한다. Fetch API가 제공하는 전역 fetch()메서드로 네트워크의 리소스를 쉽게 비동기적으로 갖올 수도 있다. fetch()함수는 첫번째 인자로 URL, 두번째 인자로 옵션 객체를 받고, promise타입의 객체를 반환한다. 반환된 객체는, API호출이 성공했을 경우 응답 객체를 resolve하고, 실패했을 경우 예외객체를 reject한다.
+
+- REST는 무엇인가요?
+
+REST(Representational State Transfer)은 자원을 이름으로 구분하여 해당 자원의 상태를 주고 받는 모든 것을 의미한다. 즉 HTTP URI를 통해 자원을 명시하고, HTTP Method를 통해 해당 자원에 대한 CRUD Operation을 적용하는 것을 의미한다.
+
+- REST API는 어떤 목적을 달성하기 위해 나왔고 어떤 장점을 가지고 있나요?
+  REST API를 통해 거대한 애플리케이션을 모듈, 기능별로 분리하기 쉬워졌다. 또한 웹 페이지를 위한 HTML 및 이미지등을 보내던 것과 달리 이제는 데이터만 보내면 여러 클라이언트에서 해당 데이터를 적절히 보여주기만 하면 되는 장점이있다. 또한 서버도 요청한 데이터만 보내주면되기 때문에 가벼워지고 유지보수성도 좋아졌다.
+
+- RESTful한 API 설계의 단점은 무엇인가요?
+
+RESTAPI 단점은 틀린 지식이 아닌, 관점이 다른 지식을 사용하여 설계를 진행할 시에 안티패턴이 될 가능성이 높고 표준 규약이 없다. 또한 RDBMS의 표현에 적합하지 않는데 RDBMS는 다양한 키들이 존재하지만 REST API는 리소스를 표현할 때 나열하기 푠한 형태인 Json과 XML을 사용하기 때문에 RDBMS에 표현이 적합하지 않다.
+
+- CORS란 무엇인가요? 이러한 기능이 왜 필요할까요? CORS는 어떻게 구현될까요?
+
+CORS는 출처가 다른 자원들을 공유한다는 뜻으로, 한 출처에 있는 자원에서 다른 출처에 있는 자원에 접근하도록 한다. 즉, 교차되는 출처 지원들의 공유로 다른 출처에 있는 자원을 요청한다면, 이를 교차 출처 요청이라고 한다. cross-origin 요청이 필요한 상황이 많아지며 안전하게 처리할 정책이 필요해져서 CORS가 등장했다. CORS 구현하는 방법은 Fetch API에서는 cors mode을 설정한 다음 서버 측에서는 응답헤더에 content-type,accept,origin등 을 추가하면 된다.
 
 ## Quest
-* 이번 퀘스트는 Midterm에 해당하는 과제입니다. 분량이 제법 많으니 한 번 기능별로 세부 일정을 정해 보고, 과제 완수 후에 그 일정이 얼마나 지켜졌는지 스스로 한 번 돌아보세요.
-  * 이번 퀘스트부터는 skeleton을 제공하지 않습니다!
-* Quest 05에서 만든 메모장 시스템을 서버와 연동하는 어플리케이션으로 만들어 보겠습니다.
-  * 클라이언트는 `fetch` API를 통해 서버와 통신합니다.
-  * 서버는 8000번 포트에 REST API를 엔드포인트로 제공하여, 클라이언트의 요청에 응답합니다.
-  * 클라이언트로부터 온 새 파일 저장, 삭제, 다른 이름으로 저장 등의 요청을 받아 서버의 로컬 파일시스템을 통해 저장되어야 합니다.
-    * 서버에 어떤 식으로 저장하는 것이 좋을까요?
-  * API 서버 외에, 클라이언트를 띄우기 위한 서버가 3000번 포트로 따로 떠서 API 서버와 서로 통신할 수 있어야 합니다.
-  * Express나 Fastify 등의 프레임워크를 사용해도 무방합니다.
-* 클라이언트 프로젝트와 서버 프로젝트 모두 `npm i`만으로 디펜던시를 설치하고 바로 실행될 수 있게 제출되어야 합니다.
-* 이번 퀘스트부터는 앞의 퀘스트의 결과물에 의존적인 경우가 많습니다. 제출 폴더를 직접 만들어 제출해 보세요!
+
+- 이번 퀘스트는 Midterm에 해당하는 과제입니다. 분량이 제법 많으니 한 번 기능별로 세부 일정을 정해 보고, 과제 완수 후에 그 일정이 얼마나 지켜졌는지 스스로 한 번 돌아보세요.
+  - 이번 퀘스트부터는 skeleton을 제공하지 않습니다!
+- Quest 05에서 만든 메모장 시스템을 서버와 연동하는 어플리케이션으로 만들어 보겠습니다.
+  - 클라이언트는 `fetch` API를 통해 서버와 통신합니다.
+  - 서버는 8000번 포트에 REST API를 엔드포인트로 제공하여, 클라이언트의 요청에 응답합니다.
+  - 클라이언트로부터 온 새 파일 저장, 삭제, 다른 이름으로 저장 등의 요청을 받아 서버의 로컬 파일시스템을 통해 저장되어야 합니다.
+    - 서버에 어떤 식으로 저장하는 것이 좋을까요?
+  - API 서버 외에, 클라이언트를 띄우기 위한 서버가 3000번 포트로 따로 떠서 API 서버와 서로 통신할 수 있어야 합니다.
+  - Express나 Fastify 등의 프레임워크를 사용해도 무방합니다.
+- 클라이언트 프로젝트와 서버 프로젝트 모두 `npm i`만으로 디펜던시를 설치하고 바로 실행될 수 있게 제출되어야 합니다.
+- 이번 퀘스트부터는 앞의 퀘스트의 결과물에 의존적인 경우가 많습니다. 제출 폴더를 직접 만들어 제출해 보세요!
 
 ## Advanced
-* `fetch` API는 구현할 수 없지만 `XMLHttpRequest`로는 구현할 수 있는 기능이 있을까요?
-* REST 이전에는 HTTP API에 어떤 패러다임들이 있었을까요? REST의 대안으로는 어떤 것들이 제시되고 있을까요?
+
+- `fetch` API는 구현할 수 없지만 `XMLHttpRequest`로는 구현할 수 있는 기능이 있을까요?
+- REST 이전에는 HTTP API에 어떤 패러다임들이 있었을까요? REST의 대안으로는 어떤 것들이 제시되고 있을까요?
