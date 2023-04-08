@@ -1,47 +1,83 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<style>
-			.square {
-				width: 100px;
-				height: 100px;
-				border: 1px dashed black;
-				display: inline-block;
-				margin: 20px;
-			}
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      .square {
+        width: 100px;
+        height: 100px;
+        border: 1px dashed black;
+        display: inline-block;
+        margin: 20px;
+      }
 
-			.enabled {
-				background-color: limegreen;
-				border: 1px solid black;
-			}
-		</style>
-	</head>
-	<body>
-		<section class="row1">
-			<div class="square"></div>
-			<div class="square"></div>
-			<div class="square"></div>
-			<div class="square"></div>
-		</section>
+      .enabled {
+        background-color: limegreen;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="row1">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </section>
 
-		<section class="row2">
-			<div class="square"></div>
-			<div class="square"></div>
-			<div class="square"></div>
-			<div class="square"></div>
-		</section>
+    <section class="row2">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </section>
 
-		<script>
-			let row1Squares = document.querySelectorAll('.row1 .square');
-			for(let node of row1Squares) {
-				/* TODO: node 변수를 어떻게 조작해야 할까요? */
-			}
+    <script>
+      let row1Squares = document.querySelectorAll('.row1 .square')
+      for (let node of row1Squares) {
+        /* TODO: node 변수를 어떻게 조작해야 할까요? */
+        node.addEventListener('click', function () {
+          //click 이벤트를 사용하여 클릭시 현재 배경 색을 확인하고 토글링한다//
 
-			let row2Squares = document.querySelectorAll('.row2 .square');
-			for(let node of row2Squares) {
-				/* TODO: node 변수를 어떻게 조작해야 할까요? */
-			}
-		</script>
-	</body>
+          //this는 각 사각형에 대한 click 이벤트 핸들러 함수 내에서 클릭된 사각형을 참조한다.//
+          if (this.style.backgroundColor == 'yellow') {
+            this.style.backgroundColor = 'white'
+          } else {
+            this.style.backgroundColor = 'yellow'
+          }
+        })
+      }
+
+      let row2Squares = document.querySelectorAll('.row2 .square')
+      for (let node of row2Squares) {
+        /* TODO: node 변수를 어떻게 조작해야 할까요? */
+
+        node.addEventListener(click, function () {
+          //enalbed라는 CSS 클라스 추가,제거 //
+
+          //this.classList는 click 이벤트가 발생한 요소의 class속성을 가리킨다//
+          if (this.classList.contains('enabled')) {
+            this.classList.remove('enabled')
+          } else {
+            this.classList.add('enabled')
+          }
+        })
+      }
+
+      //quest03-1 콘솔에 입력받은 숫자만큼 삼각형 모향으로 콘솔에 별 그리기
+      function drawTriangle(num) {
+        for (let i = 1; i <= num; i++) {
+          //총 num줄 그리기
+          let stars = ''
+          for (let j = 1; i <= num; i++) {
+            stars += '*' //현재 줄에 출력할 별 개수만큼 문자열에 추가
+          }
+          console.log(stars) //현재 줄 출력
+        }
+      }
+
+      const num = prompt('출력할 줄 수를 입력해주세요') //prompt()함수를 통해서 사용자로부터 입력받은 줄 수를 num 변수에 저장
+      drawTriangle(num)
+    </script>
+  </body>
 </html>
