@@ -1,35 +1,61 @@
 # Quest 00. 형상관리 시스템
 
 ## Introduction
-* git은 2021년 현재 개발 생태계에서 가장 각광받고 있는 버전 관리 시스템입니다. 이번 퀘스트를 통해 git의 기초적인 사용법을 알아볼 예정입니다.
+
+- git은 2021년 현재 개발 생태계에서 가장 각광받고 있는 버전 관리 시스템입니다. 이번 퀘스트를 통해 git의 기초적인 사용법을 알아볼 예정입니다.
 
 ## Topics
-* git
-  * `git clone`, `git add`, `git commit`, `git push`, `git pull`, `git branch`, `git stash` 명령
-  * `.git` 폴더
-* GitHub
+
+- git
+  - `git clone`, `git add`, `git commit`, `git push`, `git pull`, `git branch`, `git stash` 명령
+  - `.git` 폴더
+- GitHub
 
 ## Resources
-* [Resources to learn Git](https://try.github.io)
-* [Learn Git Branching](https://learngitbranching.js.org/?locale=ko)
-* [Inside Git: .Git directory](https://githowto.com/git_internals_git_directory)
+
+- [Resources to learn Git](https://try.github.io)
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=ko)
+- [Inside Git: .Git directory](https://githowto.com/git_internals_git_directory)
 
 ## Checklist
-* 형상관리 시스템은 왜 나오게 되었을까요?
-* git은 어떤 형상관리 시스템이고 어떤 특징을 가지고 있을까요? 분산형 형상관리 시스템이란 무엇일까요?
-  * git은 어떻게 개발되게 되었을까요? git이 분산형 시스템을 채택한 이유는 무엇일까요?
-* git과 GitHub은 어떻게 다를까요?
-* git의 clone/add/commit/push/pull/branch/stash 명령은 무엇이며 어떨 때 이용하나요? 그리고 어떻게 사용하나요?
-* git의 Object, Commit, Head, Branch, Tag는 어떤 개념일까요? git 시스템은 프로젝트의 히스토리를 어떻게 저장할까요?
-* 리모트 git 저장소에 원하지 않는 파일이 올라갔을 때 이를 되돌리려면 어떻게 해야 할까요?
+
+- 형상관리 시스템은 왜 나오게 되었을까요?
+
+형상관리 시스템은 소프트웨어 개발의 초기부터 사용되어온 기술이다. 초기에는 단순한 파일 복사 등으로도 충분했지만, 시간이 흐름에 따라 프로젝트 규모가 커지면서 병렬로 개발되는 코드들을 통합하는 과정에서 충돌과 오류가 발생하기 시작했고, 이에 따라 소프트웨어 개발에서 형상관리가 필수적인 요소가 되어 다양한 형상관리 시스템이 개발되었다.
+
+- git은 어떤 형상관리 시스템이고 어떤 특징을 가지고 있을까요? 분산형 형상관리 시스템이란 무엇일까요?
+
+git은 분산형 버전 관리 시스템으로, 소스 코드나 문서등의 변경 이력을 관리하고 추적할 수 있는 도구이다. git은 분산형 버전 관리 시스템, 브랜치 관리, 커밋 기록, 이력 추적, 오픈 소스, 대중화라는 특징을 가지고 있다. 분산형 형상관리 시스템은 클라이언트 측에서 저장소의 전체 사본을 유지하는 형상관리 시스템이다.
+
+- git은 어떻게 개발되게 되었을까요? git이 분산형 시스템을 채택한 이유는 무엇일까요?
+
+git은 BitKeeper라는 상용 소프트웨어를 사용하다가 라이선스 이슈로 인한 대안으로 개발되었다. git이 분산형 시스템을 채택한 이유는 분산혀 시스템은 중앙집중식 시스템과 달리 로컬자장소에서 작업할 수 있고 여러 개발자들이 동시에 작업할 수 있도록 지원했기 때문이다. 또한 분산형 시스템은 중앙집중식 시스템보다 안전하고, git은 커밋 단위로 변경 이력을 관리하므로 중앙 저장소에 반영되기 전에 여러번 검증할 수 있다.
+
+- git과 GitHub은 어떻게 다를까요?
+
+git은 분산형 형상 관리 시스템으로, 소스 코드를 버전별로 관리하고 변경 이력을 추적할 수 있는 도구인 반면 GitHub는 Git 기반으로 한 웹호스팅 서비스로, Git으로 관리하는 프로젝트를 인터넷 상에서 공유하고 협업할 수 있는 환경을 제공한다.
+
+- git의 clone/add/commit/push/pull/branch/stash 명령은 무엇이며 어떨 때 이용하나요? 그리고 어떻게 사용하나요?
+
+clone은 git 리포지토리를 복제하고 다른 사용자나 원격 서버에 있는 git 리포지토리를 로컬로 가져오고 변경 사항을 추적할 수 있다. add는 로컬에서 변경한 파일을 git이 추적하도록 추가한다. commit은 추적 중인 파일에 대한 변경사항을 로컬 저장소에 커밋한다. push는 로컬 저장소에 커밋한 변경 사항을 원격 저장소에 업로드한다. pull은 원격 저장소에서 변경 사항을 가져와 로컬 저장소와 병합한다. branch는 새로운 브랜치를 만든다. stash는 변경 사항을 일시적으로 숨기고, 나중에 다시 적용할 수 있도록 스택에 저장한다. 작업을 시작할 때 clone 명령어를 사용하여 원격 저장소를 로컬로 가져온 후 add와 commit 명령어를 사용하여 로컬에서 변경 사항을 추적하고 저장한다. 변경 사항을 공유하려면 push 명령어를 사용하여 원격 저장소에 업로드하고, 다른 사용자가 작업한 변경 사항을 가져와 적용하기 위해 pull명령어를 사용한다. 추가적으로 다른 브랜치에서 작업하거나 브랜치를 생성하고 싶을 때는 branch 명령어를, 변경 사항을 커밋하기 전에 다른 브랜치에서 작업을 해야 할 때는 stash 명령어를 사용하여 변경 사항을 일시적으로 숨길 수 있다.
+
+- git의 Object, Commit, Head, Branch, Tag는 어떤 개념일까요? git 시스템은 프로젝트의 히스토리를 어떻게 저장할까요?
+
+git은 각각의 파일을 저장하는 것이 아니라, 파일 내용에 대한 hash 값인 고유 식별자를 부여하여 저장한다. 이러한 hash 값은 git 에서 Object라하고 Blob,Tree, Commit,Annotated Tag등의 다양한 종류가 있다. Commit은 특정 시점에서의 프로젝트의 상태를 나타내는 객체로, 작업 내용을 설명하는 메시지와 이전 Commit의 Hash값을 가지고 있다. Head는 현재 checkout된 Commit을 가리키는 포인트이다. Branch는 Commit들의 집합으로, 특정 Commit을 가리키는 포인터이다. Tag는 Commit에 대한 설명이나 메모 등을 달아 놓은 객체이다. git시스템은 이러한 객체들을 저장하기 위해 .git 폴더에 데이터를 저장한다. 프로젝트의 히스토리를 저장할 때는 각 Commit 객체들이 이전 Commit 객체의 Hash 값을 가지고 있어 전체적인 히스토리를 이어갈 수 있다.
+
+- 리모트 git 저장소에 원하지 않는 파일이 올라갔을 때 이를 되돌리려면 어떻게 해야 할까요?
+
+첫 번째로는 커밋 취소하기이다. 만약 불필요한 파일이 올라 갔을 때 해당 파일을 커밋하지 않도록 커밋을 취소하는 것이다. git reset HEAD~를 통해 해당 커밋을 취소하고, 이후 다시 커밋을 진행할 때 해당 파일을 제외하고 커밋을 하면 된다. 두 번째로는 불필요한 파일 제거하기이다. 만약 이미 리모트 저장소에 커밋된 파일을 되돌리기 어렵다면 해당 파일을 제거하는 방법을 사용한다. git rm <파일이름>/ git commit -m "불필요한 파일 제거"/ git push를 통해 해당 파일을 삭제하고, 커밋을 남기면 된다.
 
 ## Quest
-* GitHub에 가입한 뒤, [이 커리큘럼의 GitHub 저장소](https://github.com/KnowRe-Dev/WebDevCurriculum)의 우상단의 Fork 버튼을 눌러 자신의 저장소에 복사해 둡니다.
-* Windows의 경우 같이 설치된 git shell을, MacOSX의 경우 터미널을 실행시켜 커맨드라인에 들어간 뒤, 명령어를 이용하여 복사한 저장소를 clone합니다.
-  * 앞으로의 git 작업은 되도록 커맨드라인을 통해 하는 것을 권장합니다.
-* 이 문서가 있는 폴더 바로 밑에 있는 sandbox 폴더에 파일을 추가한 후 커밋해 보기도 하고, 파일을 삭제해 보기도 하고, 수정해 보기도 하면서 각각의 단계에서 커밋했을 때 어떤 것들이 저장되는지를 확인합니다.
-* `clone`/`add`/`commit`/`push`/`pull`/`branch`/`stash` 명령을 충분히 익혔다고 생각되면, 자신의 저장소에 이력을 push합니다.
+
+- GitHub에 가입한 뒤, [이 커리큘럼의 GitHub 저장소](https://github.com/KnowRe-Dev/WebDevCurriculum)의 우상단의 Fork 버튼을 눌러 자신의 저장소에 복사해 둡니다.
+- Windows의 경우 같이 설치된 git shell을, MacOSX의 경우 터미널을 실행시켜 커맨드라인에 들어간 뒤, 명령어를 이용하여 복사한 저장소를 clone합니다.
+  - 앞으로의 git 작업은 되도록 커맨드라인을 통해 하는 것을 권장합니다.
+- 이 문서가 있는 폴더 바로 밑에 있는 sandbox 폴더에 파일을 추가한 후 커밋해 보기도 하고, 파일을 삭제해 보기도 하고, 수정해 보기도 하면서 각각의 단계에서 커밋했을 때 어떤 것들이 저장되는지를 확인합니다.
+- `clone`/`add`/`commit`/`push`/`pull`/`branch`/`stash` 명령을 충분히 익혔다고 생각되면, 자신의 저장소에 이력을 push합니다.
 
 ## Advanced
-* Mercurial은 어떤 형상관리 시스템일까요? 어떤 장점이 있을까요?
-* 실리콘밸리의 테크 대기업들은 어떤 형상관리 시스템을 쓰고 있을까요?
+
+- Mercurial은 어떤 형상관리 시스템일까요? 어떤 장점이 있을까요?
+- 실리콘밸리의 테크 대기업들은 어떤 형상관리 시스템을 쓰고 있을까요?
